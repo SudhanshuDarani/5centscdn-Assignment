@@ -34,9 +34,6 @@ function App() {
       [index]: !prev[index],
     }));
   };
-
-
-
   const handleDelete = (index) => {
     // Remove criteria from the list
     const updatedList = criteriaList.filter((_, i) => i !== index);
@@ -46,6 +43,22 @@ function App() {
     const updatedToggles = { ...toggles };
     delete updatedToggles[index];
     setToggles(updatedToggles);
+  };
+
+
+
+
+  const [selectedOptions, setSelectedOptions] = useState([]);
+
+  const options = ['Option 1', 'Option 2', 'Option 3', 'Option 4'];
+
+  const handleChange = (event) => {
+    const value = Array.from(event.target.selectedOptions, option => option.value);
+    setSelectedOptions(value);
+  };
+
+  const handleRemove = (option) => {
+    setSelectedOptions(selectedOptions.filter(selected => selected !== option));
   };
 
   return (
@@ -230,9 +243,7 @@ function App() {
                         </select>
 
 
-                        <div className="mb-3">
-
-                        </div>
+                        
                       </>
                     )}
                   </div>

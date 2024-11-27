@@ -104,7 +104,7 @@ function App() {
 
             <div className="criteria-list mt-5">
               {criteriaList.map((criteria, index) => {
-                const isWrapped = wrapStates[index];
+                const isWrapped = wrapStates[index]; // Check if the content is wrapped
                 const displayText = isWrapped
                   ? criteria
                   : criteria.length > 50
@@ -112,59 +112,133 @@ function App() {
                     : criteria;
 
                 return (
-                  <>
-                    <div key={index} className="criteria-item creteria-box d-flex flex-column mb-3 p-3 bg-light rounded shadow-sm">
+                  <div
+                    key={index}
+                    className="criteria-item criteria-box d-flex flex-column mb-3 p-3 bg-light rounded shadow-sm"
+                  >
+                    {/* Heading and Actions */}
+                    <div className="d-flex justify-content-between align-items-center mb-4 criteriaListHead">
+                      <h5 className="mb-0">Criteria {index + 1}</h5>
+                      <div className="d-flex align-items-center gap-3">
 
-                      {/* Heading and Actions */}
-                      <div className="d-flex  justify-content-between align-items-center mb-4 criteriaListHead" >
-                        <h5 className="mb-0">Criteria {index + 1}</h5>
-                        
-                        <div className="d-flex align-items-center gap-3">
-                          {/* Delete Button */}
-                          <button className="btn btn-danger btn-sm" onClick={() => handleDelete(index)} >
-                            Delete
-                          </button>
+                        <div className="form-check form-switch">
+                          <input
+                            className="form-check-input"
+                            type="checkbox"
+                            id={`toggle-${index}`}
+                            onChange={() => handleWrapToggle(index)}
+                            checked={toggles[index] || false}
+                          />
+                          <label className="form-check-label" htmlFor={`toggle-${index}`}>
+                            
+                          </label>
                         </div>
+
+
+
+                        {/* Delete Button */}
+                        <button
+                          className="btn btn-danger btn-sm"
+                          onClick={() => handleDelete(index)}
+                        >
+                          Delete
+                        </button>
                       </div>
-                      {/* Criteria Content */}
-                      <form className='d-flex' style={{ gap: "10pt", display: "flex", alignItems: "center" }}>
-                        <div class="dropdown">
-                          <button class="btn  btn-outline-secondary  dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" style={{}}>
-                            Client IP
-                          </button>
-                          <ul class="dropdown-menu">
-                            <li><a class="dropdown-item" href="/">Content Type</a></li>
-                            <li><a class="dropdown-item" href="/">Another action</a></li>
-                            <li><a class="dropdown-item" href="/">Something else here</a></li>
-                          </ul>
-                        </div>
-                        <div class="dropdown">
-                          <button class="btn  btn-outline-secondary  dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">
-                            Is one to
-                          </button>
-                          <ul class="dropdown-menu">
-                            <li><a class="dropdown-item" href="/">Action</a></li>
-                            <li><a class="dropdown-item" href="/">Another action</a></li>
-                            <li><a class="dropdown-item" href="/">Something else here</a></li>
-                          </ul>
-                        </div>
-
-                        <div class="mb-3 form-check">
-                          <input type="checkbox" class="form-check-input" id="exampleCheck1" />
-                          <label class="form-check-label" for="exampleCheck1">Considered X Forward for p</label>
-                        </div>
-                      </form>
-                      <select class="form-select" aria-label="Default select example">
-                        <option selected>Select Items</option>
-                        <option value="1">198.62.1.1</option>
-                        <option value="2">198.62.1.1</option>
-                        <option value="3">198.62.1.1</option>
-                      </select>
                     </div>
 
-                  </>
+                    {/* Criteria Content */}
+                    {isWrapped && (
+                      <>
+                        <form
+                          className="d-flex"
+                          style={{ gap: "10pt", display: "flex", alignItems: "center" }}
+                        >
+                          <div className="dropdown">
+                            <button
+                              className="btn btn-outline-secondary dropdown-toggle"
+                              type="button"
+                              data-bs-toggle="dropdown"
+                              aria-expanded="false"
+                            >
+                              Client IP
+                            </button>
+                            <ul className="dropdown-menu">
+                              <li>
+                                <a className="dropdown-item" href="/">
+                                  Content Type
+                                </a>
+                              </li>
+                              <li>
+                                <a className="dropdown-item" href="/">
+                                  Another action
+                                </a>
+                              </li>
+                              <li>
+                                <a className="dropdown-item" href="/">
+                                  Something else here
+                                </a>
+                              </li>
+                            </ul>
+                          </div>
+                          <div className="dropdown">
+                            <button
+                              className="btn btn-outline-secondary dropdown-toggle"
+                              type="button"
+                              data-bs-toggle="dropdown"
+                              aria-expanded="false"
+                            >
+                              Is one to
+                            </button>
+                            <ul className="dropdown-menu">
+                              <li>
+                                <a className="dropdown-item" href="/">
+                                  Action
+                                </a>
+                              </li>
+                              <li>
+                                <a className="dropdown-item" href="/">
+                                  Another action
+                                </a>
+                              </li>
+                              <li>
+                                <a className="dropdown-item" href="/">
+                                  Something else here
+                                </a>
+                              </li>
+                            </ul>
+                          </div>
+
+                          <div className="mb-3 form-check">
+                            <input
+                              type="checkbox"
+                              className="form-check-input"
+                              id={`checkbox-${index}`}
+                            />
+                            <label
+                              className="form-check-label"
+                              htmlFor={`checkbox-${index}`}
+                            >
+                              Considered X Forward for p
+                            </label>
+                          </div>
+                        </form>
+                        <select className="form-select" aria-label="Default select example">
+                          <option selected>Select Items</option>
+                          <option value="1">198.62.1.1</option>
+                          <option value="2">198.62.1.2</option>
+                          <option value="3">198.62.1.3</option>
+                        </select>
+
+
+                        <div className="mb-3">
+
+                        </div>
+                      </>
+                    )}
+                  </div>
                 );
               })}
+
             </div>
             {/* </div> */}
           </div>

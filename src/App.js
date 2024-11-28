@@ -9,11 +9,14 @@ import account from './account.png';
 import deploy from './deploy.png';
 import pullZone from './pullZone.png'
 import plus from './Icon awesome-plus (1).png'
+import setting from './setting (1).png';
 import toggle from './toggles.png';
 import activeRules from './activeRules.jpg';
 import zoneInfo from './zone Info.png';
-import edge from './Edge Rules.png'
-import setting from './setting (1).png'
+import edge from './Edge Rules.png';
+import deleteIcon from './deleteIcon.svg';
+import wrapIcon from './wrapIcon.svg';
+
 
 function App() {
   const [criteriaList, setCriteriaList] = useState([]); // List of criteria
@@ -113,8 +116,8 @@ function App() {
       </div>
 
       <nav class="navbar navbar-expand-lg bg-body-tertiary">
-        <div class="container-fluid" style={{ display: "flex",gap:"8pt", alignItems: "center" }}>
-         <img src={setting} alt="" height={"25pt"} width={"25pt"} /><img src={edge} alt="" />
+        <div class="container-fluid" style={{ display: "flex", gap: "8pt", alignItems: "center" }}>
+          <img src={setting} alt="" height={"25pt"} width={"25pt"} /><img src={edge} alt="" />
 
           <div class="collapse navbar-collapse" id="navbarNav" style={{ display: "flex", justifyContent: "end" }} >
             <ul class="navbar-nav" style={{ width: "20%", display: "flex", justifyContent: "center" }}>
@@ -146,7 +149,7 @@ function App() {
             {/* <div className="container mt-5"> */}
             {/* Criteria List with Heading, Toggle, and Delete */}
 
-            <div className="criteria-list mt-5">
+            <div className="criteria-list mt-5" >
               {criteriaList.map((criteria, index) => {
                 const isWrapped = wrapStates[index]; // Check if the content is wrapped
                 const displayText = isWrapped
@@ -156,34 +159,20 @@ function App() {
                     : criteria;
 
                 return (
-                  <div
-                    key={index}
-                    className="criteria-item criteria-box d-flex flex-column mb-3 p-3 bg-light rounded shadow-sm"
-                  >
+                  <div key={index} className="criteria-item criteria-box d-flex flex-column mb-3 p-3 bg-light rounded shadow-sm">
                     {/* Heading and Actions */}
                     <div className="d-flex justify-content-between align-items-center mb-4 criteriaListHead">
                       <h5 className="mb-0">Criteria {index + 1}</h5>
-                      <div className="d-flex align-items-center gap-3">
-
-                        <div className="form-check form-switch">
-                          <input
-                            className="form-check-input"
-                            type="checkbox"
-                            id={`toggle-${index}`}
-                            onChange={() => handleWrapToggle(index)}
-                            checked={toggles[index] || false}
-                          />
-                          <label className="form-check-label" htmlFor={`toggle-${index}`}>
-
-                          </label>
-                        </div>
+                      <div className="d-flex align-items-center">
                         {/* Delete Button */}
-                        <button
-                          className="btn btn-danger btn-sm"
-                          onClick={() => handleDelete(index)}
-                        >
-                          Delete
-                        </button>
+                        <div className="form-check form-switch">
+                          <button className="btn  btn-sm" onClick={() => handleDelete(index)} >
+                            <img src={deleteIcon} height={"30pt"} alt="" />
+                          </button>
+                          <img style={{ cursor: "pointer" }} src={wrapIcon} height={"30pt"} onClick={() => handleWrapToggle(index)} alt="" />
+                        </div>
+
+
                       </div>
                     </div>
 
@@ -196,10 +185,11 @@ function App() {
                         >
                           <div className="dropdown">
                             <button
-                              className="btn btn-outline-secondary dropdown-toggle"
+                              className="btn dropdown-toggle"
                               type="button"
                               data-bs-toggle="dropdown"
                               aria-expanded="false"
+                              style={{ border: "1pt solid #C2C2C2", color: "#000000", width: "100pt", display: "flex", justifyContent: "space-between", alignItems: "center" }}
                             >
                               Client IP
                             </button>
@@ -223,10 +213,11 @@ function App() {
                           </div>
                           <div className="dropdown">
                             <button
-                              className="btn btn-outline-secondary dropdown-toggle"
+                              className="btn dropdown-toggle"
                               type="button"
                               data-bs-toggle="dropdown"
                               aria-expanded="false"
+                              style={{ border: "1pt solid #C2C2C2", color: "#000000", width: "100pt", display: "flex", justifyContent: "space-between", alignItems: "center" }}
                             >
                               Is one to
                             </button>
@@ -249,7 +240,7 @@ function App() {
                             </ul>
                           </div>
 
-                          <div className="mb-3 form-check">
+                          <div className=" form-check">
                             <input
                               type="checkbox"
                               className="form-check-input"
@@ -258,6 +249,7 @@ function App() {
                             <label
                               className="form-check-label"
                               htmlFor={`checkbox-${index}`}
+                              style={{ fontWeight: "400", fontSize: "17px", lineHeight: "23.44px" }}
                             >
                               Considered X Forward for p
                             </label>
@@ -273,13 +265,13 @@ function App() {
                           onChange={(e) => setInputValue(e.target.value)}
                           onKeyDown={handleAddTag}
                         />
-                        <div className="border p-2 rounded mt-4">
+                        <div className=" p-2 rounded mt-4">
                           <div className="d-flex flex-wrap">
                             {tags.map((tag, index) => (
                               <div
                                 key={index}
-                                className="badge bg-light text-success border border-success me-2 mb-2 d-flex align-items-center"
-                                style={{ padding: "0.5rem 1rem", borderRadius: "5px" }}
+                                className="badge me-2 mb-2 d-flex align-items-center"
+                                style={{ border: "1pt solid #d5e8ca", padding: "0.5rem 1rem", borderRadius: "5px", color: "#59A52C",fontSize:"15px" }}
                               >
                                 {tag}
                                 <button
@@ -287,7 +279,7 @@ function App() {
                                   className="btn-close btn-sm ms-2"
                                   aria-label="Remove"
                                   onClick={() => handleRemoveTag(tag)}
-                                  style={{ fontSize: "10px" }}
+                                  style={{ fontSize: "10px", color: "#59A52C", }}
                                 ></button>
                               </div>
                             ))}

@@ -42,32 +42,34 @@ h1 {
   height: 100%;
 }
 .criteriaS {
-  width: 70%;
+  width: 90%;
   height: 100%;
   padding: 5pt;
   background-color: rgba(234, 234, 234, 0.388);
   overflow: scroll;
   position: relative;
 }
-.activeRule{
+.activeRule {
   width: 15%;
   height: 100%;
   padding: 5pt;
-
 }
 
-.divss{
+.divss {
   height: 100%;
   border: 2pt solid red;
 }
-.activeRule img{
+.activeRule img {
   height: 100%;
   width: 100%;
 }
-.criteriaS::-webkit-scrollbar{
+.criteriaS::-webkit-scrollbar {
   display: none;
 }
-
+.dropdown > button > i {
+  color: red;
+  font-size: 50pt;
+}
 .criteriaNav {
   padding: 5pt;
   display: flex;
@@ -108,8 +110,8 @@ h1 {
 }
 
 .criteria-list {
-  max-width: 600px;
-  margin: 0 auto;
+  width: 100%;
+  /* margin: 0 auto; */
 }
 
 .dynamic-component {
@@ -117,21 +119,18 @@ h1 {
   margin: 0 auto;
 }
 .criteria-item {
-  max-width: 600px;
+  max-width: 90%;
   margin: 0 auto;
   line-height: 1.6;
 }
-.creteria-box{
-  height: 100%;
-}
-.form-select{
+.form-select {
   margin-top: 10pt;
-  border: 1pt solid #6C757D;
+  border: 1pt solid #6c757d;
   outline: none;
 }
-.criteriaListHead{
+.criteriaListHead {
   padding-bottom: 10pt;
-  border-bottom: 2pt solid #E1E1E1;
+  border-bottom: 2pt solid #e1e1e1;
 }
 
 .criteria-text {

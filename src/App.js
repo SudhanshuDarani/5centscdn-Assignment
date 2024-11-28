@@ -19,7 +19,21 @@ function App() {
   // const [expandedComponents, setExpandedComponents] = useState({});
   // const [expandedCriteria, setExpandedComponents] = useState({})
   const [wrapStates, setWrapStates] = useState({});
+  const [tags, setTags] = useState(["198.62.1.1", "198.62.1.1", "198.62.1.1", "198.62.1.1", "198.62.1.1", "198.62.1.1", "198.62.1.1", "198.62.1.1", "198.62.1.1", "198.62.1.1", "198.62.1.1", "198.62.1.1"]);
+  const [inputValue, setInputValue] = useState("");
 
+  const handleAddTag = (e) => {
+    if (e.key === "Enter" && inputValue) {
+      if (!tags.includes(inputValue)) {
+        setTags([...tags, inputValue]);
+      }
+      setInputValue(""); // Clear input
+    }
+  };
+
+  const handleRemoveTag = (tagToRemove) => {
+    setTags(tags.filter((tag) => tag !== tagToRemove));
+  };
   // Function to handle form submission for adding new criteria
   const handleAddCriteria = (e) => {
     e.preventDefault();
@@ -48,18 +62,6 @@ function App() {
 
 
 
-  const [selectedOptions, setSelectedOptions] = useState([]);
-
-  const options = ['Option 1', 'Option 2', 'Option 3', 'Option 4'];
-
-  const handleChange = (event) => {
-    const value = Array.from(event.target.selectedOptions, option => option.value);
-    setSelectedOptions(value);
-  };
-
-  const handleRemove = (option) => {
-    setSelectedOptions(selectedOptions.filter(selected => selected !== option));
-  };
 
   return (
     <div className="App">
@@ -143,12 +145,9 @@ function App() {
                             checked={toggles[index] || false}
                           />
                           <label className="form-check-label" htmlFor={`toggle-${index}`}>
-                            
+
                           </label>
                         </div>
-
-
-
                         {/* Delete Button */}
                         <button
                           className="btn btn-danger btn-sm"
@@ -235,15 +234,38 @@ function App() {
                             </label>
                           </div>
                         </form>
-                        <select className="form-select" aria-label="Default select example">
-                          <option selected>Select Items</option>
-                          <option value="1">198.62.1.1</option>
-                          <option value="2">198.62.1.2</option>
-                          <option value="3">198.62.1.3</option>
-                        </select>
-
-
+                                         
+                        <input
+                            id="tag-input"
+                            type="text"
+                            className="form-control mt-4"
+                            placeholder="Select Item"
+                            value={inputValue}
+                            onChange={(e) => setInputValue(e.target.value)}
+                            onKeyDown={handleAddTag}
+                          />
+                        <div className="border p-2 rounded mt-4">
+                          <div className="d-flex flex-wrap">
+                            {tags.map((tag, index) => (
+                              <div
+                                key={index}
+                                className="badge bg-light text-success border border-success me-2 mb-2 d-flex align-items-center"
+                                style={{ padding: "0.5rem 1rem", borderRadius: "5px" }}
+                              >
+                                {tag}
+                                <button
+                                  type="button"
+                                  className="btn-close btn-sm ms-2"
+                                  aria-label="Remove"
+                                  onClick={() => handleRemoveTag(tag)}
+                                  style={{ fontSize: "10px" }}
+                                ></button>
+                              </div>
+                            ))}
+                          </div>
                         
+                        </div>
+
                       </>
                     )}
                   </div>

@@ -4,10 +4,17 @@ body {
   background-color: rgba(248, 249, 251, 1);
   user-select: none;
 }
+@font-face {
+  font-family: 'Roboto';
+  src: url('../public/Roboto-Regular.ttf') format('truetype');
+  font-weight: normal;
+  font-style: normal;
+}
+
 .App {
   height: 100%;
   width: 100%;
-  background-color: rgba(248, 249, 251, 1);
+  background-color: rgba(255, 255, 255);
 }
 .container {
   background-color: rgba(248, 249, 251, 1);
@@ -32,32 +39,33 @@ h1 {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  height: 500pt;
+  height: 600pt;
   gap: 0rem;
+  margin-top: 10pt;
 }
 .main {
   display: flex;
   justify-content: center;
-  width: 80%;
+  width: 90%;
   height: 100%;
 }
 .criteriaS {
-  width: 90%;
+  width: 80%;
   height: 100%;
-  padding: 5pt;
-  background-color: rgba(234, 234, 234, 0.388);
+  /* padding: 5pt; */
+  background-color: #f8f9fb;
   overflow: scroll;
   position: relative;
+  border-radius: 8pt;
 }
 .activeRule {
-  width: 15%;
+  width: 10%;
   height: 100%;
   padding: 5pt;
 }
 
 .divss {
   height: 100%;
-  border: 2pt solid red;
 }
 .activeRule img {
   height: 100%;
@@ -71,19 +79,19 @@ h1 {
   font-size: 50pt;
 }
 .criteriaNav {
-  padding: 5pt;
+  padding: 12pt;
   display: flex;
   justify-content: space-between;
   align-items: center;
-  /* border-bottom: 2pt solid #E1E1E1; */
-  background-color: rgb(234, 234, 234);
+  border-bottom: 2pt solid #e1e1e1;
+  background-color: #f8f9fb;
   position: sticky;
   z-index: 9999;
   top: 0;
   h2 {
-    font-family: "Lucida Sans", "Lucida Sans Regular", "Lucida Grande",
-      "Lucida Sans Unicode", Geneva, Verdana, sans-serif;
-    font-size: 20pt;
+    font-size: 30px;
+    font-family: "Roboto";
+    font-family: 500;
   }
   .nav2 {
     width: 8%;
@@ -122,6 +130,7 @@ h1 {
   max-width: 90%;
   margin: 0 auto;
   line-height: 1.6;
+  background-color: white;
 }
 .form-select {
   margin-top: 10pt;

@@ -7,12 +7,10 @@ import zone from './zones.png';
 import transcode from './transcodes.png';
 import account from './account.png';
 import deploy from './deploy.png';
-import pullZone from './pullZone.png'
 import plus from './Icon awesome-plus (1).png'
 import setting from './setting (1).png';
 import toggle from './toggles.png';
 import activeRules from './activeRules.jpg';
-import zoneInfo from './zone Info.png';
 import edge from './Edge Rules.png';
 import deleteIcon from './deleteIcon.svg';
 import wrapIcon from './wrapIcon.svg';
@@ -25,8 +23,12 @@ function App() {
   // const [expandedComponents, setExpandedComponents] = useState({});
   // const [expandedCriteria, setExpandedComponents] = useState({})
   const [wrapStates, setWrapStates] = useState({});
-  const [tags, setTags] = useState(["198.62.1.1", "198.62.1.1", "198.62.1.1", "198.62.1.1", "198.62.1.1", "198.62.1.1", "198.62.1.1", "198.62.1.1", "198.62.1.1", "198.62.1.1", "198.62.1.1", "198.62.1.1"]);
+  const [tags, setTags] = useState([]);
   const [inputValue, setInputValue] = useState("");
+  const [wrapState, setWrapState] = useState(
+    Array(criteriaList.length).fill(false) // Initialize all items as unwrapped
+  );
+
 
   const handleAddTag = (e) => {
     if (e.key === "Enter" && inputValue) {
@@ -38,7 +40,12 @@ function App() {
   };
 
   const handleRemoveTag = (tagToRemove) => {
-    setTags(tags.filter((tag) => tag !== tagToRemove));
+    const indexToRemove = tags.indexOf(tagToRemove); // Find the first occurrence index
+    if (indexToRemove !== -1) {
+      const updatedTags = [...tags];
+      updatedTags.splice(indexToRemove, 1); // Remove one instance
+      setTags(updatedTags); // Update state
+    }
   };
   // Function to handle form submission for adding new criteria
   const handleAddCriteria = (e) => {
@@ -107,14 +114,6 @@ function App() {
         </div>
       </nav>
 
-      <div className="pullZone">
-        <img src={pullZone} alt="" />
-      </div>
-
-      <div className="pullZone">
-        <img src={zoneInfo} alt="" />
-      </div>
-
       <nav class="navbar navbar-expand-lg bg-body-tertiary">
         <div class="container-fluid" style={{ display: "flex", gap: "8pt", alignItems: "center" }}>
           <img src={setting} alt="" height={"25pt"} width={"25pt"} /><img src={edge} alt="" />
@@ -137,17 +136,17 @@ function App() {
       </nav>
 
       <div className="criteriass">
+
         <div className="activeRule">
           <img src={activeRules} alt="" />
         </div>
+
         <div className="main">
           <div className="criteriaS">
             <div className="criteriaNav">
               <h2>Criteria</h2>
               <div className="nav2"><img onClick={handleAddCriteria} src={plus} alt="" /> <img src={toggle} alt="" /></div>
             </div>
-            {/* <div className="container mt-5"> */}
-            {/* Criteria List with Heading, Toggle, and Delete */}
 
             <div className="criteria-list mt-5" >
               {criteriaList.map((criteria, index) => {
@@ -159,12 +158,13 @@ function App() {
                     : criteria;
 
                 return (
-                  <div key={index} className="criteria-item criteria-box d-flex flex-column mb-3 p-3 bg-light rounded shadow-sm">
+                  <div key={index} className="criteria-item criteria-box d-flex flex-column mb-3 p-3  rounded shadow-sm">
                     {/* Heading and Actions */}
                     <div className="d-flex justify-content-between align-items-center mb-4 criteriaListHead">
                       <h5 className="mb-0">Criteria {index + 1}</h5>
+
                       <div className="d-flex align-items-center">
-                        {/* Delete Button */}
+
                         <div className="form-check form-switch">
                           <button className="btn  btn-sm" onClick={() => handleDelete(index)} >
                             <img src={deleteIcon} height={"30pt"} alt="" />
@@ -177,80 +177,30 @@ function App() {
                     </div>
 
                     {/* Criteria Content */}
-                    {isWrapped && (
+                    {!isWrapped && (
                       <>
-                        <form
-                          className="d-flex"
-                          style={{ gap: "10pt", display: "flex", alignItems: "center" }}
-                        >
-                          <div className="dropdown">
-                            <button
-                              className="btn dropdown-toggle"
-                              type="button"
-                              data-bs-toggle="dropdown"
-                              aria-expanded="false"
-                              style={{ border: "1pt solid #C2C2C2", color: "#000000", width: "100pt", display: "flex", justifyContent: "space-between", alignItems: "center" }}
-                            >
-                              Client IP
-                            </button>
-                            <ul className="dropdown-menu">
-                              <li>
-                                <a className="dropdown-item" href="/">
-                                  Content Type
-                                </a>
-                              </li>
-                              <li>
-                                <a className="dropdown-item" href="/">
-                                  Another action
-                                </a>
-                              </li>
-                              <li>
-                                <a className="dropdown-item" href="/">
-                                  Something else here
-                                </a>
-                              </li>
-                            </ul>
-                          </div>
-                          <div className="dropdown">
-                            <button
-                              className="btn dropdown-toggle"
-                              type="button"
-                              data-bs-toggle="dropdown"
-                              aria-expanded="false"
-                              style={{ border: "1pt solid #C2C2C2", color: "#000000", width: "100pt", display: "flex", justifyContent: "space-between", alignItems: "center" }}
-                            >
-                              Is one to
-                            </button>
-                            <ul className="dropdown-menu">
-                              <li>
-                                <a className="dropdown-item" href="/">
-                                  Action
-                                </a>
-                              </li>
-                              <li>
-                                <a className="dropdown-item" href="/">
-                                  Another action
-                                </a>
-                              </li>
-                              <li>
-                                <a className="dropdown-item" href="/">
-                                  Something else here
-                                </a>
-                              </li>
-                            </ul>
-                          </div>
+                        <form style={{
+                          gap: "30pt", display: "flex", alignItems: "center", padding: "0pt"
+                        }}>
+
+
+                          <select class="form-select" aria-label="Default select example" style={{ border: "1pt solid #C2C2C2", color: "#000000", width: "200pt", height: "100%", marginTop: "0pt" }}>
+                            <option selected>Client IP</option>
+                            <option value="1">One</option>
+                            <option value="2">Two</option>
+                            <option value="3">Three</option>
+                          </select>
+                          <select class="form-select" aria-label="Default select example" style={{ border: "1pt solid #C2C2C2", color: "#000000", width: "200pt", display: "flex", justifyContent: "space-between", marginTop: "0pt" }}>
+                            <option selected>Is one of</option>
+                            <option value="1">One</option>
+                            <option value="2">Two</option>
+                            <option value="3">Three</option>
+                          </select>
 
                           <div className=" form-check">
-                            <input
-                              type="checkbox"
-                              className="form-check-input"
-                              id={`checkbox-${index}`}
-                            />
-                            <label
-                              className="form-check-label"
-                              htmlFor={`checkbox-${index}`}
-                              style={{ fontWeight: "400", fontSize: "17px", lineHeight: "23.44px" }}
-                            >
+                            <input type="checkbox" className="form-check-input" id={`checkbox-${index}`} />
+                            <label className="form-check-label" htmlFor={`checkbox-${index}`}
+                              style={{ fontWeight: "400", fontSize: "17px", lineHeight: "23.44px" }}>
                               Considered X Forward for p
                             </label>
                           </div>
@@ -262,16 +212,22 @@ function App() {
                           className="form-control mt-4"
                           placeholder="Select Item"
                           value={inputValue}
-                          onChange={(e) => setInputValue(e.target.value)}
                           onKeyDown={handleAddTag}
+                          onChange={(e) => setInputValue(e.target.value)}
                         />
-                        <div className=" p-2 rounded mt-4">
+                        <div className="p-2 rounded mt-4">
                           <div className="d-flex flex-wrap">
                             {tags.map((tag, index) => (
                               <div
                                 key={index}
                                 className="badge me-2 mb-2 d-flex align-items-center"
-                                style={{ border: "1pt solid #d5e8ca", padding: "0.5rem 1rem", borderRadius: "5px", color: "#59A52C",fontSize:"15px" }}
+                                style={{
+                                  border: "1pt solid #d5e8ca",
+                                  padding: "0.5rem 1rem",
+                                  borderRadius: "5px",
+                                  color: "#59A52C",
+                                  fontSize: "15px"
+                                }}
                               >
                                 {tag}
                                 <button
@@ -279,12 +235,14 @@ function App() {
                                   className="btn-close btn-sm ms-2"
                                   aria-label="Remove"
                                   onClick={() => handleRemoveTag(tag)}
-                                  style={{ fontSize: "10px", color: "#59A52C", }}
+                                  style={{
+                                    fontSize: "10px",
+                                    color: "#59A52C"
+                                  }}
                                 ></button>
                               </div>
                             ))}
                           </div>
-
                         </div>
 
                       </>
@@ -294,7 +252,6 @@ function App() {
               })}
 
             </div>
-            {/* </div> */}
           </div>
         </div>
       </div>

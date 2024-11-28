@@ -10,7 +10,10 @@ import deploy from './deploy.png';
 import pullZone from './pullZone.png'
 import plus from './Icon awesome-plus (1).png'
 import toggle from './toggles.png';
-import activeRules from './activeRules.jpg'
+import activeRules from './activeRules.jpg';
+import zoneInfo from './zone Info.png';
+import edge from './Edge Rules.png'
+import setting from './setting (1).png'
 
 function App() {
   const [criteriaList, setCriteriaList] = useState([]); // List of criteria
@@ -100,9 +103,35 @@ function App() {
           </div>
         </div>
       </nav>
+
       <div className="pullZone">
         <img src={pullZone} alt="" />
       </div>
+
+      <div className="pullZone">
+        <img src={zoneInfo} alt="" />
+      </div>
+
+      <nav class="navbar navbar-expand-lg bg-body-tertiary">
+        <div class="container-fluid" style={{ display: "flex",gap:"8pt", alignItems: "center" }}>
+         <img src={setting} alt="" height={"25pt"} width={"25pt"} /><img src={edge} alt="" />
+
+          <div class="collapse navbar-collapse" id="navbarNav" style={{ display: "flex", justifyContent: "end" }} >
+            <ul class="navbar-nav" style={{ width: "20%", display: "flex", justifyContent: "center" }}>
+              <li class="nav-item">
+                <a class="nav-link active" aria-current="page" href="#">Rules</a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" href="#">Default Behaviours</a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" href="#">Error Logs</a>
+              </li>
+
+            </ul>
+          </div>
+        </div>
+      </nav>
 
       <div className="criteriass">
         <div className="activeRule">
@@ -234,16 +263,16 @@ function App() {
                             </label>
                           </div>
                         </form>
-                                         
+
                         <input
-                            id="tag-input"
-                            type="text"
-                            className="form-control mt-4"
-                            placeholder="Select Item"
-                            value={inputValue}
-                            onChange={(e) => setInputValue(e.target.value)}
-                            onKeyDown={handleAddTag}
-                          />
+                          id="tag-input"
+                          type="text"
+                          className="form-control mt-4"
+                          placeholder="Select Item"
+                          value={inputValue}
+                          onChange={(e) => setInputValue(e.target.value)}
+                          onKeyDown={handleAddTag}
+                        />
                         <div className="border p-2 rounded mt-4">
                           <div className="d-flex flex-wrap">
                             {tags.map((tag, index) => (
@@ -263,7 +292,7 @@ function App() {
                               </div>
                             ))}
                           </div>
-                        
+
                         </div>
 
                       </>
@@ -277,11 +306,6 @@ function App() {
           </div>
         </div>
       </div>
-
-
-
-
-
     </div>
   );
 }
